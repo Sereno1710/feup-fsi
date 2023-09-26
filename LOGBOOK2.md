@@ -4,7 +4,7 @@
 ## Identificação
 
 - CVE-2022-0847 (também chamado de Dirty Pipe) é uma vulnerabilidade que existe no kernel do Linux desde a versão 5.8.
-- Esta vulnerabilidade permite a qualquer utilizador sobrescrever qualquer ficheiro "read-only", mesmo sem este possuir os privilégios necessários.
+- Esta vulnerabilidade permite a qualquer utilizador sobrescrever ficheiros "read-only", mesmo sem este possuir os privilégios necessários.
 - Foi corrigida no Linux 5.16.11, 5.15.25 e 5.10.102.
 
 ## Catalogação
