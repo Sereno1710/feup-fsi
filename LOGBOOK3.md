@@ -13,7 +13,7 @@ De seguida, procuramos informações sobre os CVEs associados a cada plugin(vers
 A resposta à primeira parte do CTF é então a seguinte: 
 
 ````
-flag[CVE-2021-34646]
+flag{CVE-2021-34646}
 ````
 
 ## Parte 2
