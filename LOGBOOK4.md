@@ -60,7 +60,7 @@ Mesmo tendo criado uma `dynamic linked library` e connectado à `C library` usan
 ```
 echo "LD_PRELOAD=/tmp/libaccess.so.1.0.1" > env
 ```
-Esta variável de ambiente faz com que ao executar o script, relendo todas as livrarias, esta seja a primeira a ser lida.
+Esta variável de ambiente, `LD_PRELOAD` faz com que ao executar o script, relendo todas as livrarias, esta seja a primeira a ser lida.
 
 É possível verificar se esta variável foi criada ao executar o comando `cat env`. Dessa forma, concluímos os passos necessários para obter a flag. Restava apenas esperar que o script fosse executado novamente para obter a flag.
 
