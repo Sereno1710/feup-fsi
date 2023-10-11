@@ -1,6 +1,8 @@
-# CTF 1 - Semana 3
+# Semana 3
 
-## Parte 1
+## CTF - Wordpress CVE
+
+### Parte 1
 
 Acedemos à página **http://ctf-fsi.fe.up.pt:5001**, que é um servidor WordPress. De seguida procuramos pelo site informações sobre as suas dependências, acabando por descobrir 3:
 
@@ -8,7 +10,7 @@ Acedemos à página **http://ctf-fsi.fe.up.pt:5001**, que é um servidor WordPre
 - Woocommerce plugin 5.7.1
 - Booster for WooCommerce plugin 5.4.3
 
-De seguida, procuramos informações sobre os CVEs associados a cada plugin(versão correspondente). Acabamos por nos aperceber que o CVE-2021-34646 seria o mais adequado, pois permitia fazer login como outro utilizador. 
+De seguida, procuramos informações sobre os CVEs associados a cada plugin (versão correspondente). Acabamos por nos aperceber que o CVE-2021-34646 seria o mais adequado, pois permitia fazer login como outro utilizador. 
 
 A resposta à primeira parte do CTF é então a seguinte: 
 
@@ -16,7 +18,7 @@ A resposta à primeira parte do CTF é então a seguinte:
 flag{CVE-2021-34646}
 ````
 
-## Parte 2
+### Parte 2
 
 Ao descobrir a vulnerabilidade do site, foi possível obter um script em Python para atacar o site. No entanto, para utilizar o script era necessário primeiramente fazer um pedido de reset de password. 
 
@@ -50,7 +52,7 @@ flag{please don't bother me}
 ````
 
 
-## Vulnerabilidades
+### Vulnerabilidades
 
 Após a resolução deste CTF, foi possível concluir que tipo de melhorias seria necessário fazer para melhorar a segurança do site.
 
