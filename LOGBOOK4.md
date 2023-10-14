@@ -151,7 +151,7 @@ Vamos aproveitar do facto de que, se não for passado o path completo do ficheir
 export PATH=/home/daniel:$PATH 
 ```
 
-E vamos mover o nosso código malicioso para esse diretório, com o nome `ls`. Verificamos etntão que este será executado, quando corrermos o `systemls` denovo.
+E vamos mover o nosso código malicioso para esse diretório, com o nome `ls`. Verificamos então que este será executado, quando corrermos o `systemls` denovo.
 
 ![image](assets/s4i7.png)
 
