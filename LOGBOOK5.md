@@ -31,9 +31,9 @@ Notas: <br>
 3. Criámos uma variável ```ret``` através do valor ```start```, obtido através da subtração do tamanho do buffer e do tamanho do nosso shellcode, somado ao endereço obtido pelo GDB de ```ebp```. Este valor contém o endereço de retorno que aponta para a execução da shell.
 4. Por final, através dos endereços ```ebp``` e ```buffer``` ambos obtidas pelo GDB calculamos o endereço de retorno em relação ao inicio do ```content```, ```offset```.
 
-![Alt text](image-2.png)
+![image](assets/s5i5.png)
 
 Após isto executamos o ficheiro ```exploit.py``` que dá resultado ao nosso ficheiro ```badfile```. Executamos então o programa ```stack-L1``` que resulta num trigger a um buffer overflow e invoca uma sheel com permissões root. 
 
-![Alt text](image.png)
+![image](assets/s5i6.png)
 ## CTF - Buffer Overflow
