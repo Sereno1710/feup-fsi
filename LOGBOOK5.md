@@ -36,4 +36,23 @@ Notas: <br>
 Após isto executamos o ficheiro ```exploit.py``` que dá resultado ao nosso ficheiro ```badfile```. Executamos então o programa ```stack-L1``` que resulta num trigger a um buffer overflow e invoca uma sheel com permissões root. 
 
 ![image](assets/s5i6.png)
+
+### Task 4
+
+Semelhante à task anterior começamos por executar um debug através do ```GDB``` e obtivemos o valor do endereço do ```buffer```.
+
+![image](assets/s5i7.png)
+
+Assim fizemos as alterações necessárias no nosso ficheiro ```exploit.py```:
+Notas: <br>
+1. Trocamos a posição do shellcode para o final do badfile (```content[517 - len(shellcode):] = shellcode```).
+2. O return adress também foi alterado acrescentando um valor superior a 200 ao endereço obtido do buffer. (No caso 500, após tentar com 400 e 300).
+3. Como o tamanho do buffer é de 200 e cada endereço ocupa 4 bytes colocamos um loop de range 50 de forma a conseguir encontrar a verdadeira posição do return address e colocá-lo lá.
+
+![image](assets/s5i8.png)
+
+Após isso executamos os ficheiros ```exploit.py``` e ```stack-L2``` que resultou num trigger de um buffer overflow e invocou uma shell com permissões root.
+
+![image](assets/s5i9.png)
+
 ## CTF - Buffer Overflow
