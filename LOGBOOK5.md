@@ -43,8 +43,7 @@ Semelhante à task anterior começamos por executar um debug através do ```GDB`
 
 ![image](assets/s5i9.png)
 
-Assim fizemos as alterações necessárias no nosso ficheiro ```exploit.py```:
-Notas: <br>
+Assim fizemos as alterações necessárias no nosso ficheiro ```exploit.py```: <br>
 1. Trocamos a posição do shellcode para o final do badfile (```content[517 - len(shellcode):] = shellcode```).
 2. O return adress também foi alterado acrescentando um valor superior a 200 ao endereço obtido do buffer. (No caso 500, após tentar com 400 e 300).
 3. Como o tamanho do buffer é de 200 e cada endereço ocupa 4 bytes colocamos um loop de range 50 de forma a conseguir encontrar a verdadeira posição do return address e colocá-lo lá.
