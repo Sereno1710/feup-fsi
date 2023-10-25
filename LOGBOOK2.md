@@ -1,4 +1,3 @@
-
 # Semana 2
 
 ## Caracterização de vulnerabilidade (CVE)
