@@ -55,3 +55,50 @@ Após isso executamos os ficheiros ```exploit.py``` e ```stack-L2``` que resulto
 ![image](assets/s5i8.png)
 
 ## CTF - Buffer Overflow
+
+
+### Desafio 1
+
+O ```program``` (executável do main) não possui importantes características de segurança, uma vez que funciona numa arquitetura i386-32-bit, sem proteção RELRO, sem canário de pilha, sem proteção NX, sem suporte para Executáveis de Posição Independente (PIE) e possui segmentos que são tanto legíveis, escrevíveis como executáveis (RWX). Verificamos estas propriedades do ```program``` com o comando
+ ```checksec program```.
+
+
+ De seguida analisamos o ficheiro ```main.c```. Verificamos que o ```meme_file``` tem 8 bytes de espaço e o ```buffer```, que armazena a resposta do utilizador, possui 32 bytes de espaço.
+
+ No entanto, notamos também que o ```scanf``` permite a cópida de 40 bytes para o ```buffer``` o que permite dar overflow ao buffer.
+
+ Em uma stack, a memória alocada é contígua e depende da ordem em que as variáveis são declaradas. Portanto, se ultrapassarmos a capacidade do ```buffer```, acabamos por sobrescrever a área de memória reservada para ```meme_file```. Como as instruções subsequentes em ```main.c``` exibem o conteúdo de ```meme_file```, nosso objetivo é reescrever o nome do arquivo a ser lido de forma a mostrar o conteúdo de ```flag.txt```.
+
+ Assim, é apenas necessário escrever o seguinte texto para obter a flag:
+
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflag.txt
+
+
+ Tendo então obtido: 
+
+                flag{6e61d0ffb5903eedeeaa1cf2ebd8ec61}
+
+ ### Desafio 2
+
+Fazendo ```checksec program``` novamente, notamos que tem as mesmas características do ```program``` do Desafio1.
+
+No entanto, ao analisar o código verificamos novos segmentos de código. Existe alocação de 9 bytes para ```meme_file```. no entanto, por ter 2 ```'\0'``` é lido como se fosse apenas ```meme_file\0```. ALém disso, existe agora a variável ```val```, com 4 bytes alocados. Esta variável ```val``` é importante para a vulnerabilidade pois, apesar de dificultar o processo de exploit, é necessária para o mesmo.
+
+É atribuído a ```val``` o seguinte valor: ```"\xef\xbe\xad\xde"```. 
+
+Ao correr o programa pela primeira vez e sem tentar dar exploit, verificamos que o ```val= 0xdeadbeef```. Logo, podemos concluir que para esta condição se verificar 
+
+             if(*(int*)val == 0xfefc2324)
+
+é necessário reescrever o que está em val (0xfefc2324 = ```"\xfe\xbe\xad\xde```) para (0x2423fcfe = ```\xdeadbeef```).
+
+Como no desafio anterior, a memória alocada é contígua, ,logo é necessário reescrever buffer, val e meme_file por essa ordem. Sendo então o input necessário:
+
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x24\x23\xfc\xfeflag.txt'
+
+Obtendo a flag:
+
+                flag{69efacb5de4fbed521eb433ef91018c1}
+
+
+
