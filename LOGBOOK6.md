@@ -12,7 +12,7 @@ E verificámos que o script era executado, ou seja, o site é vulnerável a ataq
 
 ![image](assets/s6i1.png)
 
-A página que o adminstrador usa para aceitar ou rejeitar os pedidos da flag possui 2 botões `Give the flag` e `Mark the request as read` Estes botões, para os utilizadores comuns, não são clicáveis, mas podemos alterar o html do site usando a ferramente `Inspect` do browser para podermos interagir com eles.
+A página que o adminstrador usa para aceitar ou rejeitar os pedidos da flag possui 2 botões `Give the flag` e `Mark the request as read`. Estes botões, para os utilizadores comuns, não são clicáveis, mas podemos alterar o html do site usando a ferramenta `Inspect` do browser para podermos interagir com eles.
 
 ![image](assets/s6i2.png)
 ![image](assets/s6i3.png)

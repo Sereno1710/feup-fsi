@@ -71,12 +71,12 @@ O ```program``` (executável do main) não possui importantes características d
 
  Assim, é apenas necessário escrever o seguinte texto para obter a flag:
 
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflag.txt
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaflag.txt
 
 
  Tendo então obtido: 
 
-                flag{6e61d0ffb5903eedeeaa1cf2ebd8ec61}
+flag{6e61d0ffb5903eedeeaa1cf2ebd8ec61}
 
  ### Desafio 2
 
@@ -88,17 +88,17 @@ No entanto, ao analisar o código verificamos novos segmentos de código. Existe
 
 Ao correr o programa pela primeira vez e sem tentar dar exploit, verificamos que o ```val= 0xdeadbeef```. Logo, podemos concluir que para esta condição se verificar 
 
-             if(*(int*)val == 0xfefc2324)
+if(*(int*)val == 0xfefc2324)
 
 é necessário reescrever o que está em val (0xfefc2324 = ```"\xfe\xbe\xad\xde```) para (0x2423fcfe = ```\xdeadbeef```).
 
 Como no desafio anterior, a memória alocada é contígua, ,logo é necessário reescrever buffer, val e meme_file por essa ordem. Sendo então o input necessário:
 
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x24\x23\xfc\xfeflag.txt'
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x24\x23\xfc\xfeflag.txt'
 
 Obtendo a flag:
 
-                flag{69efacb5de4fbed521eb433ef91018c1}
+flag{69efacb5de4fbed521eb433ef91018c1}
 
 
 
