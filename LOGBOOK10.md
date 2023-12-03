@@ -242,4 +242,19 @@ Podemos assim concluir, apesar de o processo ser o mesmo, o método de encripta�
 
 
 
-### CTF
+## CTF - WEAK ENCRYPTION
+
+O principal objetivo deste CTF era obter a flag através da vulnerabilidade presente na cifração de mensagens.
+
+Na análise do arquivo ```cipherspec.py```, descobrimos um problema significativo na geração de chaves do algoritmo AES-CTR. A função que visa a criação de chaves preenche a maioria delas com bytes nulos (\x00), limitando a randomização aos três últimos bytes. Este método reduz significativamente o número de chaves potenciais, tornando um ataque de ```brute force``` possível.
+
+Durante o CTF, obtivemos os valores de ```nonce``` e ```ciphertext``` através do comando ```nc ctf-fsi.fe.up.pt 6003```:
+
+![image](assets/s10i1.png)
+
+
+Para explorar essa vulnerabilidade, desenvolvemos um script Python que testa todas as combinações possíveis dos três últimos bytes da chave. O objetivo é descriptografar a mensagem encriptada fornecida no desafio, testando todas as chaves viáveis. Consideramos que a chave correta foi encontrada quando uma delas gera uma mensagem descriptografada iniciada com ```flag{```.
+
+![image](assets/s10i2.png)
+
+![image](assets/s10i3.png)
