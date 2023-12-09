@@ -1,6 +1,6 @@
 # Semana 11
 
-## SEED Labs - SQL Injection Lab
+## SEED Labs - Public-Key Infrastructure (PKI) Lab
 
 ### TASK 1
 
