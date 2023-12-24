@@ -214,11 +214,60 @@ Para tal será necessário os valores anteriormente referidos.
 ```python
 
     if pkt.haslayer(ARP) and pkt[ARP].op == 1:
-        arp = ARP(hwlen=6, plen=4, op=2, pdst=pkt[ARP].psrc, hwdst=pkt[ARP].hwdst, psrc=pkt[ARP].psrc)
+        arp = ARP(hwlen=6, plen=4, op=2, pdst=pkt[ARP].psrc, hwdst=pkt[ARP].hwsrc, psrc=pkt[ARP].pdst)
+        send(arp)
 ```
 
 Além disso, é necessário também conhecer mais sobre os pacotes ICMP.
 
+![ICMP capture](assets/s13i12.png)
+![ICMP capture](assets/s13i13.png)
+
+O campo `type` corresponde ao tipo de pacote ICMP. O valor 8 corresponde a um pedido ICMP e o valor 0 corresponde a uma resposta ICMP.
+
+O campo `code` corresponde ao código do pacote ICMP. O valor 0 corresponde a um pedido ICMP e o valor 0 corresponde a uma resposta ICMP.
+
+Portanto o nosso objetivo com os pacotes ICMP é simular a resposta ICMP, caso o pedido ICMP exista.
+
+Para tal será necessário os valores anteriormente referidos.
+
+```python
+
+    if pkt.haslayer(ICMP) and pkt[ICMP].type == 8:
+        ip=IP(src=pkt[IP].dst, dst=pkt[IP].src)
+        icmp = ICMP(type=0, code=0, id=pkt[ICMP].id, seq=pkt[ICMP].seq)
+        data = pkt[Raw].load
+        spoof_pkt = ip/icmp/data
+        send(spoof_pkt)
+
+```
+
+E por fim, para dar sniff às mensagens ICMP, é necessário usar o seguinte código:
+
+```python
+
+pkt = sniff(iface='br-a9932627838c', filter='icmp', prn=spoff_sniff_pkt) 
+
+```
+
+Para o ping a um host B não existente, o resultado é o seguinte:
+
+![1.4 capture](assets/s13i14.png)
+
+O que o nosso programa faz é enviar uma resposta ICMP para o host A com o objetivo de simular que o host B existe.
+
+
+Para o ping a um host B existente, o resultado é o seguinte:
+
+![1.4 capture](assets/s13i15.png)
+
+Como o host existe, os pacotes recebidos são duplicados pois o host A recebe a resposta ICMP do host B e a resposta ICMP do nosso programa.
+
+
+
+Para o ping a um host B não existente na LAN, o resultado é o seguinte:
+
+Infelizmente não conseguimos obter o resultado pretendido. O nosso programa não consegue enviar um pacote ARP falso para o host A. O que nos permitiria obter o endereço MAC do host A e assim enviar uma resposta ICMP para o host A.
 
 
 
