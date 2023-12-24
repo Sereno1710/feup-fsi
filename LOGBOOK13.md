@@ -185,7 +185,7 @@ for i in range(1, 50):
 
 Verificamos no wireshark que foi necessário saltar 10 routers para chegar ao destino.
 
-![1.3 capture](assets/s13i9.png)
+![1.3 capture](assets/S13I9.png)
 
 #### Task 1.4: Sniffing and Spoofing
 
